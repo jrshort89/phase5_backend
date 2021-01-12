@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::API
-    before_action :authorized
+    before_action :authenticate_user
     include ::ActionController::Cookies
 
-    def encode_token(payload)
+    def encode_jwt(payload)
         JWT.encode(payload, Rails.application.secrets.secret_key_base)
     end
 
@@ -10,10 +10,10 @@ class ApplicationController < ActionController::API
         request.headers['Authorization']
     end
 
-    def decode_token(token)
+    def decode_jwt(token)
         if auth_header
             begin
-                JWT.decode(jwt, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
+                JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
             rescue JWT::DecodeError 
                 render json: {message: "Login Error!"}, status: :unauthorized
 
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::API
 
     def current_user
         if decode_jwt(cookies.signed[:jwt])
-            user_id=decode_jwt(cookies.signed[:jwt])
+            user_id = decode_jwt(cookies.signed[:jwt])
             return @user=User.find_by(id: user_id)
         end
         
