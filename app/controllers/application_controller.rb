@@ -26,12 +26,12 @@ class ApplicationController < ActionController::API
         if decode_jwt(cookies.signed[:jwt])
             user_id = decode_jwt(cookies.signed[:jwt])
             return @user=User.find_by(id: user_id)
-        end
-        
-        def logged_in?
-        !!current_user
-        end
+        end    
     end 
+
+    def logged_in?
+    !!current_user
+    end
 
     def authenticate_user
         jwt = cookies.signed[:jwt]
