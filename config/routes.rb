@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
       resources :users, only: [:create]
       post '/login', to: 'auth#create'
-      get '/profile', to: 'users#profile'
+      post '/users', to: 'users#create'
       get '/lessons', to: 'lessons#index'
       get '/lessons/:id', to: 'lessons#show'
       get '/subjectlessons', to: 'subject_lessons#index'

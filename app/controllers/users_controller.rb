@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       return render json: {status: "error", message: "#{user_params[:username]} is taken. Please choose another username. Be creative. Be be creative. (cheerleader chant)"}
     end
     @token = encode_jwt(@user.id)
-    render json: {user: @user.username, jwt: @token}, status: :created
+    render json: {user: @user, jwt: @token}, status: :created
   end
 
   def update
