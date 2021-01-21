@@ -11,6 +11,7 @@ class LessonsController < ApplicationController
         lesson = Lesson.new lesson_params
         subject = Subject.find_by name: params[:subject][:subject]
         if lesson.save
+            params[:lessonTests].map { |test| Test.create(lesson_id: lesson.id, input: test[0], output: test[1]) }
             SubjectLesson.create lesson_id: lesson.id, subject_id: subject.id
             return render json: lesson
         end
