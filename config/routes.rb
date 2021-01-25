@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post '/lessons', to: 'lessons#create'
 
       post '/solutions',to: 'solutions#create'
+      get '/solutions', to: 'solutions#index'
 
       get '/subjectlessons', to: 'subject_lessons#index'
       get '/subjects', to: 'subjects#index'

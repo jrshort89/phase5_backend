@@ -1,4 +1,12 @@
 class SolutionsController < ApplicationController
+
+    def index
+        @solutions = Solution.all
+        render json: @solutions.to_json( include: [:lesson])
+    end
+
+    @all.to_json(include: [{:lessons => {include: :tests}}, :subject_lessons])
+
     def create
         @solution = Solution.new solution_params
         if @solution.save
