@@ -85,7 +85,7 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  # url: <%= ENV['DATABASE_URL'] %>
   database: phase5_back_production
   username: postgres
   password: <%= ENV['TRASHERBACKEND_DATABASE_PASSWORD'] %>
