@@ -11,7 +11,7 @@ Solution.destroy_all
 SubjectLesson.destroy_all
 UserSolution.destroy_all
 
-5.times {Lesson.create(text: Faker::Lorem.sentence, subject: Faker::Lorem.sentence)}
+5.times {Lesson.create(text: Faker::Lorem.sentence, name: Faker::Lorem.sentence)}
 
 5.times {Subject.create(name: Faker::Lorem.sentence(word_count: 2))}
 
